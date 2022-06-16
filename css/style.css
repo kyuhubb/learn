@@ -1,0 +1,78 @@
+body{
+	text-align: center;
+	font-size: 2em;
+	margin-top: 25px;
+}
+
+.font3{
+	font-size: 3em;
+	font-family: arial;
+}
+
+.cadre{
+	background: ghostwhite;
+	border-radius: 5px;
+	width: 50%;
+	margin: auto;
+	border: 2px ridge dimgrey;
+}
+
+#answer_box input{
+	font-size: 0.8em;
+	margin: 25px;
+	width: 50%;
+}
+
+#answer_box{
+	display: none;
+}
+
+button{
+	font-size: 0.8em;
+	font-family: arial;
+}
+
+#correct_box, #reading_box{
+	color: rebeccapurple;
+}
+
+.blackbox{
+	font-size: 0.8em!important;
+	background: mediumpurple;
+	width: 50%;
+	color: ghostwhite;
+	border-radius: 5px;
+	border-bottom-right-radius: none;
+	border-bottom-left-radius: none;
+	padding: 5px;
+	margin: auto;
+	margin-top: 15px;
+	font-family: arial;
+}
+
+r{
+	color: brown;
+}
+
+.explanations{
+	font-size: 0.8em;
+	border: 1px solid dimgrey;
+	border-top: none;
+	width: 50%;
+	padding: 4px;
+	margin: auto;
+}
+
+@media (max-width: 768px){
+	.explanations, .blackbox, .cadre, #answer_box input{
+		width: 96vw;
+	}
+
+	#answer_box input{
+		margin: 5px;
+	}
+
+	#information{
+		font-size: 0.6em;
+	}
+}

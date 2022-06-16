@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src='js/nikolib.js'></script>
+</head>
+<body>
+		<div class='cadre'>
+		<div id='question_box' class='font3'>文<r>法</r></div>
+			<div class="learn">
+				<div id='reading'>ぶん<r>ぽう</r></div>
+				<div id='translation'><r>gram</r>maire</div>
+				<br>
+			</div>
+		</div>
+		<div class="learn">
+			<div id='construction'class='blackbox'>construction grammaticale</div>
+			<div id='idea' class='explanations'>idée principale</div>
+			<br>
+		<button onclick='init()'>démarrer</button>
+		</div>
+	</div>
+	<div id='answer_box'><input placeholder='tapez ici...' id='input'></div>
+	<div id='information'></div><br>
+		<div id='correct_box'></div>
+		<div id='reading_box'></div>
+	<script>
+		var values = [];
+		var question = [];
+		var answer = [];
+		var lecture = [];
+		var info = [];
+		var quest = [];
+		var ready = false;
+		var current = 0;
+		var user = "";
+		var tot = 0;
+		//charge le script
+		var deck = document.createElement('script');
+		deck.src = "lessons/"+$_GET('q')+".js";
+		document.getElementsByTagName('body')[0].appendChild(deck);
+
+		function init(){
+			document.getElementsByClassName('learn')[0].style.display = 'none';
+			document.getElementsByClassName('learn')[1].style.display = 'none';
+			document.getElementById('answer_box').style.display = 'block';
+			tot = question.length;
+			for (i = 0; i < tot; ++i){
+			   	values.push(i);
+			}
+			for(i = 0; i < tot; ++i){
+				var n = values.splice(Math.random()*values.length,1)[0];
+				quest.push(n);
+			}
+			document.getElementById('question_box').innerHTML = question[quest[current]];
+			document.getElementById('information').innerHTML = info[quest[current]];
+			document.getElementById('question_box').style.fontSize = "1em";
+			document.getElementsByClassName('cadre')[0].style.marginTop = "25vh";
+
+			ready = true;
+		}
+
+		function check(){
+			if(user == answer[quest[current]] || user == lecture[quest[current]]){
+				next();
+			}else{
+				document.getElementById('correct_box').innerHTML = answer[quest[current]];
+				document.getElementById('reading_box').innerHTML = lecture[quest[current]];
+			}
+		}
+
+		function next(){
+			if(current < tot-1){
+				current++;
+				document.getElementById('question_box').innerHTML = question[quest[current]];
+				document.getElementById('information').innerHTML = info[quest[current]];
+				document.getElementById('reading_box').innerHTML = '';
+				document.getElementById('correct_box').innerHTML = '';
+			}else{
+				window.location = 'index.html?q='+$_GET('q');
+			}
+		}
+
+		function tl(word,clas){
+			document.getElementsByClassName(clas)[0].innerHTML = word;
+		}
+		// détection de touches
+		document.addEventListener("keydown", (e) => {
+			if (e.key == "Enter"){
+				if(ready == true){
+		  			user = document.getElementById('input').value;
+		  			document.getElementById('input').value = "";
+		  			check();
+				}
+  			}
+		});
+	</script>
+</body>
+</html>
